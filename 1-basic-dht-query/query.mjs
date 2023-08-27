@@ -13,13 +13,10 @@ await node.ready()
 console.log('Node initalised at:', node.port, node.host);
 const q = node.query({ target: Buffer.from(hex, 'hex'), command: GET }, { commit: true })
 
-// console.log(`hex: ${hex.toString()}`);
-
 try {
   for await (const data of q) {
     if (data.value && hash(data.value).toString('hex') === hex) {
-      // We found the value! Destroy the query stream as there is no need to continue.
-      console.log('Item found.\n', hex, '-->', data.value.toString())
+      console.log('Item found:', hex, '-->', data.value.toString())
       break
     }
 }
@@ -31,7 +28,7 @@ try {
   }
 }
 
-console.log('(query finished)')
+console.log('Query finished. Exiting.')
 node.destroy(); // cleanup, allow script to complete
 
 function hash(val) {
