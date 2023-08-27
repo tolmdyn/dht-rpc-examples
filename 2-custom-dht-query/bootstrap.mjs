@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import DHT from 'dht-rpc'
 //const DHT = require('dht-rpc')
 
